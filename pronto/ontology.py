@@ -280,8 +280,9 @@ class Ontology(Mapping[str, Union[Term, Relationship]]):
             buffer = _handle.peek(io.DEFAULT_BUFFER_SIZE)
             for cls in BaseParser.__subclasses__():
                 if cls.can_parse(typing.cast(str, self.path), buffer):
+                    print(cls,self)
                     cls(self).parse_from(_handle)  # type: ignore
-                    break
+                    # break
             else:
                 raise ValueError(f"could not find a parser to parse {handle!r}")
 
